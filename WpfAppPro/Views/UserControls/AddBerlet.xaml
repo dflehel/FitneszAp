@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="WpfAppPro.Views.UserControls.AddBerlet"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfAppPro.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" ></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Margin="20" HorizontalAlignment="Left">Felhasznalo</Label>
+        <ComboBox Grid.Row="0" Grid.Column="1"  Margin="20" ItemsSource="{Binding users}" SelectedItem="{Binding selecteduser}" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1} {2}">
+                                <Binding Path="First_Name"/>
+                                <Binding Path="Last_Name"/>
+                                <Binding Path="Kod"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+
+            </ComboBox.ItemTemplate>
+           </ComboBox>
+        <Label Grid.Row="0" Grid.Column="2"  Margin="20"  HorizontalAlignment="Left">Berlet Tipus</Label>
+        <ComboBox Grid.Row="0" Grid.Column="3"  Margin="20" ItemsSource="{Binding tipus}" DisplayMemberPath="Leiras" SelectedItem="{Binding selectedtipus}"></ComboBox>
+        <Label Grid.Row="1" Grid.ColumnSpan="2"  Margin="20"  HorizontalAlignment="Left">Idotartam</Label>
+        <TextBox Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="2"  Margin="20" Text="{Binding hanyalkalom}" ></TextBox>
+        <Label Grid.Row="2" Grid.Column="0"  Margin="20"  HorizontalAlignment="Left">Kezdeti Ora</Label>
+        <TextBox Grid.Row="2" Grid.Column="1"  Margin="20" Text="{Binding kezdet}"></TextBox>
+        <Label Grid.Row="2" Grid.Column="2"  Margin="20"  HorizontalAlignment="Left">Veg Ora</Label>
+        <TextBox Grid.Row="2" Grid.Column="3"  Margin="20"  Text="{Binding veg}"></TextBox>
+        <Grid Grid.ColumnSpan="4" Grid.Row="3"  Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Grid.Column="0" >
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center">Napok kijelolese</Label>
+                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding daysselected}"></CheckBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="1" >
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center">Hetfo</Label>
+                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center"  Command="{Binding slectingcommand}" IsChecked="{Binding hetfo}" ></CheckBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="2">
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center">Kedd</Label>
+                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center"  Command="{Binding slectingcommand}" IsChecked="{Binding kedd}" ></CheckBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="3" >
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center">Szerda</Label>
+                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center"  Command="{Binding slectingcommand}" IsChecked="{Binding szerda}" ></CheckBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="4">
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center">Csutortok</Label>
+                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center"  Command="{Binding slectingcommand}" IsChecked="{Binding csut}" ></CheckBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="5">
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center">Pentek</Label>
+                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center"  Command="{Binding slectingcommand}" IsChecked="{Binding pentek}" ></CheckBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="6">
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center">Szombat</Label>
+                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center"  Command="{Binding slectingcommand}" IsChecked="{Binding szombat}" ></CheckBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="7">
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center">Vasarnap</Label>
+                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center"  Command="{Binding slectingcommand}" IsChecked="{Binding vasarnap}" ></CheckBox>
+            </StackPanel>
+        </Grid>
+        <Label Grid.Row="4" Grid.ColumnSpan="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right">Ar:</Label>
+        <Label Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="2" Content="{Binding ar}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" ></Label>
+        <Button Grid.Row="5" Grid.ColumnSpan="4" VerticalAlignment="Bottom"  Margin="20" Command="{Binding addcommand}"> Vasarlas</Button>
+    </Grid>
+    
+</UserControl>

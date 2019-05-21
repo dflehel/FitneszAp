@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FitneszDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Belepes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ki" Type="int" />
+          <Property Name="Melyik Berlet" Type="int" />
+          <Property Name="Mikor jott" Type="datetime" />
+          <Property Name="Mikor ment" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Berlet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Idotartam" Type="int" />
+          <Property Name="Belepesek szama" Type="int" />
+          <Property Name="Kezdeti ora" Type="int" />
+          <Property Name="Veg ora" Type="int" />
+          <Property Name="Napok" Type="binary" MaxLength="7" />
+          <Property Name="Aktiv" Type="bit" />
+        </EntityType>
+        <EntityType Name="Ertek">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mikortol" Type="datetime" />
+          <Property Name="Meddig" Type="datetime" />
+          <Property Name="Ar" Type="money" />
+          <Property Name="Tipus" Type="int" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tipus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Leiras" Type="text" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First Name" Type="varchar" MaxLength="50" />
+          <Property Name="Last Name" Type="varchar" MaxLength="50" />
+          <Property Name="Kod" Type="varchar" MaxLength="10" />
+          <Property Name="Picture" Type="image" />
+        </EntityType>
+        <EntityType Name="Vasarolt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ki" Type="int" />
+          <Property Name="Milyent" Type="int" />
+          <Property Name="Ertek" Type="int" />
+        </EntityType>
+        <Association Name="FK_Belepes_ToTable_Berlet">
+          <End Role="Berlet" Type="Self.Berlet" Multiplicity="0..1" />
+          <End Role="Belepes" Type="Self.Belepes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Berlet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Belepes">
+              <PropertyRef Name="Melyik Berlet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Belepes_ToTable_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Belepes" Type="Self.Belepes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Belepes">
+              <PropertyRef Name="Ki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ertek_ToTable_Tipus">
+          <End Role="Tipus" Type="Self.Tipus" Multiplicity="0..1" />
+          <End Role="Ertek" Type="Self.Ertek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ertek">
+              <PropertyRef Name="Tipus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vasarolt_ToTable_Berlet">
+          <End Role="Berlet" Type="Self.Berlet" Multiplicity="0..1" />
+          <End Role="Vasarolt" Type="Self.Vasarolt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Berlet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vasarolt">
+              <PropertyRef Name="Milyent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vasarolt_ToTable_Ertek">
+          <End Role="Ertek" Type="Self.Ertek" Multiplicity="0..1" />
+          <End Role="Vasarolt" Type="Self.Vasarolt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ertek">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vasarolt">
+              <PropertyRef Name="Ertek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vasarolt_ToTable_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Vasarolt" Type="Self.Vasarolt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vasarolt">
+              <PropertyRef Name="Ki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FitneszDBModelStoreContainer">
+          <EntitySet Name="Belepes" EntityType="Self.Belepes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Berlet" EntityType="Self.Berlet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ertek" EntityType="Self.Ertek" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipus" EntityType="Self.Tipus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vasarolt" EntityType="Self.Vasarolt" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Belepes_ToTable_Berlet" Association="Self.FK_Belepes_ToTable_Berlet">
+            <End Role="Berlet" EntitySet="Berlet" />
+            <End Role="Belepes" EntitySet="Belepes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Belepes_ToTable_User" Association="Self.FK_Belepes_ToTable_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Belepes" EntitySet="Belepes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ertek_ToTable_Tipus" Association="Self.FK_Ertek_ToTable_Tipus">
+            <End Role="Tipus" EntitySet="Tipus" />
+            <End Role="Ertek" EntitySet="Ertek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vasarolt_ToTable_Berlet" Association="Self.FK_Vasarolt_ToTable_Berlet">
+            <End Role="Berlet" EntitySet="Berlet" />
+            <End Role="Vasarolt" EntitySet="Vasarolt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vasarolt_ToTable_Ertek" Association="Self.FK_Vasarolt_ToTable_Ertek">
+            <End Role="Ertek" EntitySet="Ertek" />
+            <End Role="Vasarolt" EntitySet="Vasarolt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vasarolt_ToTable_User" Association="Self.FK_Vasarolt_ToTable_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Vasarolt" EntitySet="Vasarolt" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FitneszDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Belepe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ki" Type="Int32" />
+          <Property Name="Melyik_Berlet" Type="Int32" />
+          <Property Name="Mikor_jott" Type="DateTime" Precision="3" />
+          <Property Name="Mikor_ment" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Berlet" Relationship="Self.FK_Belepes_ToTable_Berlet" FromRole="Belepes" ToRole="Berlet" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Belepes_ToTable_User" FromRole="Belepes" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Berlet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Idotartam" Type="Int32" />
+          <Property Name="Belepesek_szama" Type="Int32" />
+          <Property Name="Kezdeti_ora" Type="Int32" />
+          <Property Name="Veg_ora" Type="Int32" />
+          <Property Name="Napok" Type="Binary" MaxLength="7" FixedLength="true" />
+          <Property Name="Aktiv" Type="Boolean" />
+          <NavigationProperty Name="Belepes" Relationship="Self.FK_Belepes_ToTable_Berlet" FromRole="Berlet" ToRole="Belepes" />
+          <NavigationProperty Name="Vasarolts" Relationship="Self.FK_Vasarolt_ToTable_Berlet" FromRole="Berlet" ToRole="Vasarolt" />
+        </EntityType>
+        <EntityType Name="Ertek">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mikortol" Type="DateTime" Precision="3" />
+          <Property Name="Meddig" Type="DateTime" Precision="3" />
+          <Property Name="Ar" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Tipus" Type="Int32" />
+          <NavigationProperty Name="Tipu" Relationship="Self.FK_Ertek_ToTable_Tipus" FromRole="Ertek" ToRole="Tipus" />
+          <NavigationProperty Name="Vasarolts" Relationship="Self.FK_Vasarolt_ToTable_Ertek" FromRole="Ertek" ToRole="Vasarolt" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tipu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Leiras" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Erteks" Relationship="Self.FK_Ertek_ToTable_Tipus" FromRole="Tipus" ToRole="Ertek" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Kod" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Belepes" Relationship="Self.FK_Belepes_ToTable_User" FromRole="User" ToRole="Belepes" />
+          <NavigationProperty Name="Vasarolts" Relationship="Self.FK_Vasarolt_ToTable_User" FromRole="User" ToRole="Vasarolt" />
+        </EntityType>
+        <EntityType Name="Vasarolt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ki" Type="Int32" />
+          <Property Name="Milyent" Type="Int32" />
+          <Property Name="Ertek" Type="Int32" />
+          <NavigationProperty Name="Berlet" Relationship="Self.FK_Vasarolt_ToTable_Berlet" FromRole="Vasarolt" ToRole="Berlet" />
+          <NavigationProperty Name="Ertek1" Relationship="Self.FK_Vasarolt_ToTable_Ertek" FromRole="Vasarolt" ToRole="Ertek" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Vasarolt_ToTable_User" FromRole="Vasarolt" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Belepes_ToTable_Berlet">
+          <End Role="Berlet" Type="Self.Berlet" Multiplicity="0..1" />
+          <End Role="Belepes" Type="Self.Belepe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Berlet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Belepes">
+              <PropertyRef Name="Melyik_Berlet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Belepes_ToTable_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Belepes" Type="Self.Belepe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Belepes">
+              <PropertyRef Name="Ki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vasarolt_ToTable_Berlet">
+          <End Role="Berlet" Type="Self.Berlet" Multiplicity="0..1" />
+          <End Role="Vasarolt" Type="Self.Vasarolt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Berlet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vasarolt">
+              <PropertyRef Name="Milyent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ertek_ToTable_Tipus">
+          <End Role="Tipus" Type="Self.Tipu" Multiplicity="0..1" />
+          <End Role="Ertek" Type="Self.Ertek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ertek">
+              <PropertyRef Name="Tipus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vasarolt_ToTable_Ertek">
+          <End Role="Ertek" Type="Self.Ertek" Multiplicity="0..1" />
+          <End Role="Vasarolt" Type="Self.Vasarolt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ertek">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vasarolt">
+              <PropertyRef Name="Ertek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vasarolt_ToTable_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Vasarolt" Type="Self.Vasarolt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vasarolt">
+              <PropertyRef Name="Ki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FitneszDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Belepes" EntityType="Self.Belepe" />
+          <EntitySet Name="Berlets" EntityType="Self.Berlet" />
+          <EntitySet Name="Erteks" EntityType="Self.Ertek" />
+          <EntitySet Name="Tables" EntityType="Self.Table" />
+          <EntitySet Name="Tipus" EntityType="Self.Tipu" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Vasarolts" EntityType="Self.Vasarolt" />
+          <AssociationSet Name="FK_Belepes_ToTable_Berlet" Association="Self.FK_Belepes_ToTable_Berlet">
+            <End Role="Berlet" EntitySet="Berlets" />
+            <End Role="Belepes" EntitySet="Belepes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Belepes_ToTable_User" Association="Self.FK_Belepes_ToTable_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Belepes" EntitySet="Belepes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vasarolt_ToTable_Berlet" Association="Self.FK_Vasarolt_ToTable_Berlet">
+            <End Role="Berlet" EntitySet="Berlets" />
+            <End Role="Vasarolt" EntitySet="Vasarolts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ertek_ToTable_Tipus" Association="Self.FK_Ertek_ToTable_Tipus">
+            <End Role="Tipus" EntitySet="Tipus" />
+            <End Role="Ertek" EntitySet="Erteks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vasarolt_ToTable_Ertek" Association="Self.FK_Vasarolt_ToTable_Ertek">
+            <End Role="Ertek" EntitySet="Erteks" />
+            <End Role="Vasarolt" EntitySet="Vasarolts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vasarolt_ToTable_User" Association="Self.FK_Vasarolt_ToTable_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Vasarolt" EntitySet="Vasarolts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FitneszDBModelStoreContainer" CdmEntityContainer="FitneszDBContext">
+          <EntitySetMapping Name="Belepes">
+            <EntityTypeMapping TypeName="FitneszDBModel.Belepe">
+              <MappingFragment StoreEntitySet="Belepes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ki" ColumnName="Ki" />
+                <ScalarProperty Name="Melyik_Berlet" ColumnName="Melyik Berlet" />
+                <ScalarProperty Name="Mikor_jott" ColumnName="Mikor jott" />
+                <ScalarProperty Name="Mikor_ment" ColumnName="Mikor ment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Berlets">
+            <EntityTypeMapping TypeName="FitneszDBModel.Berlet">
+              <MappingFragment StoreEntitySet="Berlet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Idotartam" ColumnName="Idotartam" />
+                <ScalarProperty Name="Belepesek_szama" ColumnName="Belepesek szama" />
+                <ScalarProperty Name="Kezdeti_ora" ColumnName="Kezdeti ora" />
+                <ScalarProperty Name="Veg_ora" ColumnName="Veg ora" />
+                <ScalarProperty Name="Napok" ColumnName="Napok" />
+                <ScalarProperty Name="Aktiv" ColumnName="Aktiv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Erteks">
+            <EntityTypeMapping TypeName="FitneszDBModel.Ertek">
+              <MappingFragment StoreEntitySet="Ertek">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Mikortol" ColumnName="Mikortol" />
+                <ScalarProperty Name="Meddig" ColumnName="Meddig" />
+                <ScalarProperty Name="Ar" ColumnName="Ar" />
+                <ScalarProperty Name="Tipus" ColumnName="Tipus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tables">
+            <EntityTypeMapping TypeName="FitneszDBModel.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipus">
+            <EntityTypeMapping TypeName="FitneszDBModel.Tipu">
+              <MappingFragment StoreEntitySet="Tipus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Leiras" ColumnName="Leiras" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FitneszDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="First_Name" ColumnName="First Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+                <ScalarProperty Name="Kod" ColumnName="Kod" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vasarolts">
+            <EntityTypeMapping TypeName="FitneszDBModel.Vasarolt">
+              <MappingFragment StoreEntitySet="Vasarolt">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ki" ColumnName="Ki" />
+                <ScalarProperty Name="Milyent" ColumnName="Milyent" />
+                <ScalarProperty Name="Ertek" ColumnName="Ertek" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

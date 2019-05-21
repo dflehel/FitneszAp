@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="WpfAppPro.Views.UserControls.SortBy"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppPro.Views.UserControls"
+        mc:Ignorable="d"
+        Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Margin="5 5 5 5" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedItem}" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Stretch">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Image" Width="auto"  IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Black" BorderThickness="2" CornerRadius="37">
+                                <Ellipse Width="75" Height="75" >
+                               
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding Picture}" ></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            </Border>
+                        </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="First Name" Width="2*" Binding="{Binding First_Name}" FontSize="20" />
+                    <DataGridTextColumn Header="Last Name" Width="2*" Binding="{Binding Last_Name}" FontSize="20"/>
+                    <DataGridTextColumn Header="Kod"  Width="*" Binding="{Binding Kod}" FontSize="20"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        <Button Grid.Row="0" Grid.Column="0" Command="{Binding AddCommand}" Content="Add" Margin="5 5 5 5"/>
+        <Button Grid.Row="0" Grid.Column="1" Command="{Binding UpdateCommand}" Content="Update" Margin="5 5 5 5"/>
+        <Button Grid.Row="0" Grid.Column="2" Command="{Binding DeleteCommand}" Content="Delete" Margin="5 5 5 5"/>
+        </Grid>
+</UserControl>

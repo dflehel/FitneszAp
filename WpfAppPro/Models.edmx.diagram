@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4d36559169964f89b4f8645dc0f20271" Name="Diagram1">
+        <EntityTypeShape EntityType="FitneszDBModel.Belepe" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitneszDBModel.Berlet" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitneszDBModel.Ertek" Width="1.5" PointX="3.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitneszDBModel.Table" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitneszDBModel.Tipu" Width="1.5" PointX="1.5" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitneszDBModel.User" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitneszDBModel.Vasarolt" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="FitneszDBModel.FK_Belepes_ToTable_Berlet" ManuallyRouted="false" />
+        <AssociationConnector Association="FitneszDBModel.FK_Belepes_ToTable_User" ManuallyRouted="false" />
+        <AssociationConnector Association="FitneszDBModel.FK_Vasarolt_ToTable_Berlet" ManuallyRouted="false" />
+        <AssociationConnector Association="FitneszDBModel.FK_Ertek_ToTable_Tipus" ManuallyRouted="false" />
+        <AssociationConnector Association="FitneszDBModel.FK_Vasarolt_ToTable_Ertek" ManuallyRouted="false" />
+        <AssociationConnector Association="FitneszDBModel.FK_Vasarolt_ToTable_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
